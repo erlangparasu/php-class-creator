@@ -66,6 +66,9 @@ function generateFileData(fileName: string | undefined) {
     data[0] = words2.join('') + '.php';
     data[1] = getClassStub();
 
+    // TODO {{namespace}}
+    // TODO {{className}}
+
     return data;
 }
 
