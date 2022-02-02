@@ -23,20 +23,43 @@ export function activate(context: vscode.ExtensionContext) {
         console.log('_formatted', a._formatted);
         console.log('scheme', a.scheme);
 
-        let uri = vscode.Uri.parse(a.path);
-        let dataUint8Arr = await vscode.workspace.fs.readFile(uri);
-        let contextContent = new TextDecoder("utf-8").decode(dataUint8Arr);
-        // console.log('contextContent:', contextContent);
+        let isLinux = false;
+        if (a.path.indexOf('/') >= 0) {
+            isLinux = true;
+        }
 
-        let parsedNamespace = parseNameSpaceFromFileContent(contextContent);
-        console.log('parsedNamespace:', parsedNamespace);
+        let isFolder = false;
+        let parsedNamespace: string | null;
+        try {
+            let uri = vscode.Uri.parse(a.path);
+            let dataUint8Arr = await vscode.workspace.fs.readFile(uri);
+            let contextContent = new TextDecoder("utf-8").decode(dataUint8Arr);
+            // console.log('contextContent:', contextContent);
+
+            parsedNamespace = parseNameSpaceFromFileContent(contextContent);
+            console.log('parsedNamespace:', parsedNamespace);
+        } catch (error) {
+            console.log('error:', (error as object).toString());
+            let strError = (error as object).toString();
+
+            if (strError.indexOf('EntryIsADirectory') >= 0) {
+                isFolder = true;
+            }
+        }
 
         // console.log('b:', b);
         // console.log('c:', c);
         // console.log('d:', d);
 
-        let folderPath = parseFolderFromPath(a.path);
+        let folderPath = parseFolderFromPath(isLinux, a.path);
         console.log('folderPath:', folderPath);
+
+        if (isFolder) {
+            console.log('isFolder true:', a.path);
+            if (isLinux) {
+                folderPath = a.path + '/';
+            }
+        }
 
         vscode.window.showInputBox({ placeHolder: "Please enter a file name", }).then((fileName) => {
             let data = generateFileData(fileName, parsedNamespace, folderPath);
@@ -51,8 +74,6 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         vscode.window.showInformationMessage('Hello World from php class creator!');
-
-        // vscode.workspace.fs.writeFile
     });
 
     context.subscriptions.push(disposable);
@@ -153,10 +174,9 @@ function parseNameSpaceFromFileContent(content: string) {
     return null;
 }
 
-function parseFolderFromPath(path: string) {
+function parseFolderFromPath(isLinux: boolean, path: string) {
     // "/usr/local/var/www/abc/app/Services/Socialite/SocialiteServerService.php"
-    if (path.indexOf('/') >= 0) {
-        // linux
+    if (isLinux) {
         let strFilename;
         let segments = path.split('/');
         if (segments.length > 0) {
