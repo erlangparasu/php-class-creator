@@ -44,6 +44,32 @@ export function activate(context: vscode.ExtensionContext) {
 
             if (strError.indexOf('EntryIsADirectory') >= 0) {
                 isFolder = true;
+
+                // "app/Services/Socialite";
+
+                let relativePath = vscode.workspace.asRelativePath(a.path);
+                console.log('asRelativePath', relativePath);
+
+                if (relativePath.length > 0) {
+                    let arr = relativePath.split('');
+                    arr[0] = arr[0].toUpperCase();
+                    let ns = arr.join('');
+                    console.log('ns', ns);
+
+                    // "App/Services/Socialite";
+
+                    if (isLinux) {
+                        ns = ns.split('/').join('\\');
+                        console.log('ns', ns);
+                    } else {
+                        ns = ns.split('\\').join('\\');
+                        console.log('ns', ns);
+                    }
+
+                    // "App\\Services\\Socialite";
+
+                    parsedNamespace = ns;
+                }
             }
         }
 
