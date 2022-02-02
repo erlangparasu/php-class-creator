@@ -64,6 +64,12 @@ function generateFileData(fileName: string | undefined) {
 
     let className = words2.join('');
 
+    className = className.split('').filter(function (d, i, arr) {
+        let alp = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        alp = alp + alp.toLowerCase();
+        return alp.split('').indexOf(d) > -1;
+    }).join('');
+
     let raw = getClassStub();
     raw = raw.replace('{{className}}', className);
 
