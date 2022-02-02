@@ -62,12 +62,16 @@ function generateFileData(fileName: string | undefined) {
         words2.push(newWord);
     });
 
-    let data = [];
-    data[0] = words2.join('') + '.php';
-    data[1] = getClassStub();
+    let className = words2.join('');
+
+    let raw = getClassStub();
+    raw = raw.replace('{{className}}', className);
 
     // TODO {{namespace}}
-    // TODO {{className}}
+
+    let data = [];
+    data[0] = className + '.php';
+    data[1] = raw;
 
     return data;
 }
