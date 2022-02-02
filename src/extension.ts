@@ -45,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (strError.indexOf('EntryIsADirectory') >= 0) {
                 isFolder = true;
 
-                // "app/Services/Socialite";
+                // "app/Services/Socialite"
 
                 let relativePath = vscode.workspace.asRelativePath(a.path);
                 console.log('asRelativePath', relativePath);
@@ -56,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
                     let ns = arr.join('');
                     console.log('ns', ns);
 
-                    // "App/Services/Socialite";
+                    // "App/Services/Socialite"
 
                     if (isLinux) {
                         ns = ns.split('/').join('\\');
@@ -66,7 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
                         console.log('ns', ns);
                     }
 
-                    // "App\\Services\\Socialite";
+                    // "App\\Services\\Socialite"
 
                     parsedNamespace = ns;
                 }
@@ -191,7 +191,9 @@ function parseNameSpaceFromFileContent(content: string) {
         let foundStr = content.substring(posStart, posEnd);
 
         // "namespace App\Services\Socialite"
+
         let str = foundStr.replace('namespace ', '').replace(';', '');
+
         // "App\Services\Socialite"
 
         return str;
