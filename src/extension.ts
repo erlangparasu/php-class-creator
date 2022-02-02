@@ -84,6 +84,8 @@ export function activate(context: vscode.ExtensionContext) {
             console.log('isFolder true:', a.path);
             if (isLinux) {
                 folderPath = a.path + '/';
+            } else {
+                folderPath = a.path + '\\';
             }
         }
 
@@ -204,20 +206,28 @@ function parseNameSpaceFromFileContent(content: string) {
 
 function parseFolderFromPath(isLinux: boolean, path: string) {
     // "/usr/local/var/www/abc/app/Services/Socialite/SocialiteServerService.php"
+
+    let splitChar = '';
     if (isLinux) {
-        let strFilename;
-        let segments = path.split('/');
-        if (segments.length > 0) {
-            let lastSegment = segments[segments.length - 1];
-            if (lastSegment.toLowerCase().indexOf('.php') >= 0) {
-                strFilename = segments.pop();
-            }
+        splitChar = '/';
+    } else {
+        splitChar = '\\';
+    }
+
+    let strFilename;
+    let segments = path.split(splitChar);
+    if (segments.length > 0) {
+        let lastSegment = segments[segments.length - 1];
+        if (lastSegment.toLowerCase().indexOf('.php') >= 0) {
+            strFilename = segments.pop();
         }
-        if (strFilename) {
-            let resultFolderPath = path.replace(strFilename, '');
-            // "/usr/local/var/www/abc/app/Services/Socialite/"
-            return resultFolderPath;
-        }
+    }
+    if (strFilename) {
+        let resultFolderPath = path.replace(strFilename, '');
+
+        // "/usr/local/var/www/abc/app/Services/Socialite/"
+
+        return resultFolderPath;
     }
 
     return null;
