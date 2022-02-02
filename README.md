@@ -1,6 +1,6 @@
 # php-class-creator README
 
-This is the README for your extension "php-class-creator". After writing up a brief description, we recommend including the following sections.
+PHP Class Creator
 
 ## Features
 
