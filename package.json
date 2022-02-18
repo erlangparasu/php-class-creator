@@ -17,13 +17,13 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:php-class-creator.helloWorld"
+		"onCommand:php-class-creator.createPhpClass"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "php-class-creator.helloWorld",
+				"command": "php-class-creator.createPhpClass",
 				"title": "Create PHP Class File"
 			}
 		],
@@ -31,7 +31,7 @@
 			"explorer/context": [
 				{
 					"when": "explorerResourceIsFolder || resourceExtname == .php",
-					"command": "php-class-creator.helloWorld",
+					"command": "php-class-creator.createPhpClass",
 					"alt": "markdown.showPreviewToSide",
 					"group": "1_modification@1"
 				}
