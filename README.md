@@ -8,7 +8,8 @@ Help to create/generate php class file
 
 ![Screenshot](images/screenshot-20220218-135922.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+<!--
+> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow. -->
 
 <!--
 ## Known Issues
