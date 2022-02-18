@@ -2,7 +2,7 @@
 	"name": "php-class-creator",
 	"displayName": "php class creator/generator",
 	"description": "Help to create/generate php class file",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
@@ -33,7 +33,7 @@
 					"when": "explorerResourceIsFolder || resourceExtname == .php",
 					"command": "php-class-creator.helloWorld",
 					"alt": "markdown.showPreviewToSide",
-					"group": "navigation"
+					"group": "1_modification@1"
 				}
 			]
 		}
