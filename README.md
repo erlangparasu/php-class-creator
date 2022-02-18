@@ -17,6 +17,10 @@ Help to create/generate php class file
 Calling out known issues can help limit users opening duplicate issues against your extension.
 -->
 
+## Links
+
+https://marketplace.visualstudio.com/items?itemName=erlangparasu.php-class-creator
+
 ## Release Notes
 
 ### 1.0.0
