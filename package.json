@@ -1,8 +1,8 @@
 {
 	"name": "php-class-creator",
-	"displayName": "php class creator/generator",
-	"description": "Help to create/generate php class file",
-	"version": "1.0.3",
+	"displayName": "php-class-creator",
+	"description": "Help to create or generate php class file",
+	"version": "1.0.4",
 	"engines": {
 		"vscode": "^1.63.0"
 	},

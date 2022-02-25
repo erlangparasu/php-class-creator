@@ -4,7 +4,7 @@ PHP Class Creator
 
 ## Features
 
-Help to create/generate php class file
+Help to create or generate php class file
 
 ![Screenshot](images/screenshot-20220218-135922.gif)
 
